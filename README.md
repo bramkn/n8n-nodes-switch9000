@@ -28,6 +28,9 @@ When selecting sender, it will give you the same options and act the same as a n
 
 When Receiver is choosen. You need to select the Index you want to receive on this part of the workflow. It will then filter the data and continue with the data from the Index choosen.
 
+![Receiver](https://github.com/bramkn/n8n-nodes-switch9000/blob/master/images/receiver.png)
+
+
 
 ## Resources
 
