@@ -1,19 +1,19 @@
 {
-  "name": "n8n-nodes-<...>",
+  "name": "n8n-nodes-switch9000",
   "version": "0.1.0",
-  "description": "",
+  "description": "A switch node that allows more outputs. As many as your n8n will handle in one node.",
   "keywords": [
     "n8n-community-node-package"
   ],
   "license": "MIT",
-  "homepage": "",
+  "homepage": "https://github.com/bramkn/n8n-nodes-switch9000.git",
   "author": {
-    "name": "",
-    "email": ""
+    "name": "Bram Knuever",
+    "email": "bram@knitco.nl"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/<...>/n8n-nodes-<...>.git"
+    "url": "https://github.com/bramkn/n8n-nodes-switch9000.git"
   },
   "main": "index.js",
   "scripts": {
@@ -30,12 +30,9 @@
   "n8n": {
     "n8nNodesApiVersion": 1,
     "credentials": [
-      "dist/credentials/ExampleCredentialsApi.credentials.js",
-      "dist/credentials/HttpBinApi.credentials.js"
     ],
     "nodes": [
-      "dist/nodes/ExampleNode/ExampleNode.node.js",
-      "dist/nodes/HttpBin/HttpBin.node.js"
+      "dist/nodes/Switch9000/Switch9000.node.js"
     ]
   },
   "devDependencies": {

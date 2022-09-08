@@ -6,28 +6,49 @@ import {
 	NodeOperationError,
 } from 'n8n-workflow';
 
-export class ExampleNode implements INodeType {
+export class Switch9000 implements INodeType {
 	description: INodeTypeDescription = {
-		displayName: 'Example Node',
-		name: 'exampleNode',
+		displayName: 'Switch 9000',
+		name: 'switch9000',
 		group: ['transform'],
 		version: 1,
-		description: 'Basic Example Node',
+		description: 'Switch node with more outputs.',
 		defaults: {
-			name: 'Example Node',
+			name: 'Switch9000',
 		},
 		inputs: ['main'],
 		outputs: ['main'],
 		properties: [
-			// Node properties which the user gets displayed and
-			// can change on the node.
 			{
-				displayName: 'My String',
-				name: 'myString',
-				type: 'string',
-				default: '',
-				placeholder: 'Placeholder value',
-				description: 'The description text',
+				displayName: 'Mode',
+				name: 'mode',
+				type: 'options',
+				options: [
+					{
+						name: 'Sender',
+						value: 'sender',
+					},
+					{
+						name: 'Receiver',
+						value: 'receiver',
+					},
+				],
+				default: 'Receiver',
+				description: 'Weither the node will act like a Sender or receiver for the switch functionality.',
+			},
+			{
+				displayName: 'Route index',
+				name: 'index',
+				type: 'number',
+				default: 0,
+				displayOptions:{
+					show:	{
+						mode: [
+							'Receiver',
+						],
+					},
+				},
+				description: 'The index of the route.',
 			},
 		],
 	};
