@@ -739,6 +739,10 @@ export class Switch9000 implements INodeType {
 							if (compareOperationResult === true) {
 								// If rule matches add it to the correct output and continue with next item
 								checkIndexRange(ruleData.output as number);
+								item.json = {
+									route:ruleData.output,
+									data:item.json
+								};
 								returnData.push(item);
 								continue itemLoop;
 							}
@@ -748,6 +752,10 @@ export class Switch9000 implements INodeType {
 						outputIndex = this.getNodeParameter('fallbackOutput', itemIndex) as number;
 						if (outputIndex !== -1) {
 							checkIndexRange(outputIndex);
+							item.json = {
+								route:outputIndex,
+								data:item.json
+							};
 							returnData.push(item);
 						}
 					}
@@ -762,10 +770,10 @@ export class Switch9000 implements INodeType {
 		};
 		if(nodeMode === "receiver"){
 			const routeIndex = this.getNodeParameter('routeIndex', 0) as number;
-			const data:INodeExecutionData[] = items.filter(x => x.json.route === routeIndex).map(function(item) {
-				return {binary:item.binary,json:item.data} as INodeExecutionData;
+			const filtered = items.filter(x => x.json.route === routeIndex).map(function(item) {
+				return {binary:item.binary,json:item.json.data, pairedItem: item.pairedItem} as INodeExecutionData;
 			});
-			returnData.push.apply(returnData,data);
+			returnData.push.apply(returnData,filtered);
 
 		}
 		return this.prepareOutputData(returnData);
