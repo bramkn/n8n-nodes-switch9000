@@ -15,6 +15,7 @@ export class Switch9000 implements INodeType {
 		name: 'switch9000',
 		group: ['transform'],
 		version: 1,
+		icon: 'file:s9000.svg',
 		description: 'Switch node with more outputs.',
 		defaults: {
 			name: 'Switch9000',
