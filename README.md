@@ -7,13 +7,6 @@ It is unsure how n8n would perform with a node that has over 9000 outputs.
 
 [n8n](https://n8n.io/) is a [fair-code licensed](https://docs.n8n.io/reference/license/) workflow automation platform.
 
-[Installation](#installation)  
-[Operations](#operations)  
-[Compatibility](#compatibility)  
-[Usage](#usage)  <!-- delete if not using this section -->  
-[Resources](#resources)  
-[Version history](#version-history)  <!-- delete if not using this section -->  
-
 ## Installation
 
 Follow the [installation guide](https://docs.n8n.io/integrations/community-nodes/installation/) in the n8n community nodes documentation.
@@ -26,6 +19,8 @@ The code from the switch node was borrowed in the development of this node. So p
 ## Usage
 
 When placing the node, you need to choose the mode of it. You can choose between Reciever and Sender.
+
+![Mode](https://github.com/bramkn/n8n-nodes-switch9000/blob/master/images/mode.png)
 
 
 ## Resources
