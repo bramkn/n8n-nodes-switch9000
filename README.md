@@ -1,4 +1,4 @@
-# n8n-nodes-siwtch9000
+# n8n-nodes-switch9000
 
 This is an n8n community node. It lets you create a switch with an infinite number of routes. 
 For as long as you n8n instance allows it of course. 
