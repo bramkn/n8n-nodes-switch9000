@@ -680,7 +680,7 @@ export class Switch9000 implements INodeType {
 						checkIndexRange(outputIndex);
 						item.json = {
 							route:outputIndex,
-							data:item.json
+							data:item.json,
 						};
 
 						returnData.push(item);
@@ -716,7 +716,7 @@ export class Switch9000 implements INodeType {
 								checkIndexRange(ruleData.output as number);
 								item.json = {
 									route:ruleData.output,
-									data:item.json
+									data:item.json,
 								};
 								returnData.push(item);
 								continue itemLoop;
@@ -729,7 +729,7 @@ export class Switch9000 implements INodeType {
 							checkIndexRange(outputIndex);
 							item.json = {
 								route:outputIndex,
-								data:item.json
+								data:item.json,
 							};
 							returnData.push(item);
 						}
@@ -742,10 +742,10 @@ export class Switch9000 implements INodeType {
 					throw error;
 				}
 			}
-		};
+		}
 		if(nodeMode === "receiver"){
 			const routeIndex = this.getNodeParameter('routeIndex', 0) as number;
-			const filtered = items.filter(x => x.json.route === routeIndex).map(function(item) {
+			const filtered = items.filter(x => x.json.route === routeIndex).map( item => {
 				return {binary:item.binary,json:item.json.data, pairedItem: item.pairedItem} as INodeExecutionData;
 			});
 			returnData.push.apply(returnData,filtered);
