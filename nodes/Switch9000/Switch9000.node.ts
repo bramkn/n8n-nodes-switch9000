@@ -33,11 +33,11 @@ export class Switch9000 implements INodeType {
 						value: 'receiver',
 					},
 				],
-				default: 'Receiver',
-				description: 'Weither the node will act like a Sender or receiver for the switch functionality.',
+				default: 'receiver',
+				description: 'Weither the node will act like a Sender or receiver for the switch functionality',
 			},
 			{
-				displayName: 'Route index',
+				displayName: 'Route Index',
 				name: 'index',
 				type: 'number',
 				default: 0,
@@ -48,7 +48,7 @@ export class Switch9000 implements INodeType {
 						],
 					},
 				},
-				description: 'The index of the route.',
+				description: 'The index of the route',
 			},
 		],
 	};
