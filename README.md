@@ -23,8 +23,10 @@ When placing the node, you need to choose the mode of it. You can choose between
 ![Mode](https://github.com/bramkn/n8n-nodes-switch9000/blob/master/images/mode.png)
 
 This will determine of this node will send or receive data.
-When selecting sender, it will act the same as a normal switch node.
+When selecting sender, it will give you the same options and act the same as a normal switch node.
 * [n8n switch node docs](https://docs.n8n.io/integrations/builtin/core-nodes/n8n-nodes-base.switch/)
+
+When Receiver is choosen. You need to select the Index you want to receive on this part of the workflow. It will then filter the data and continue with the data from the Index choosen.
 
 
 ## Resources
