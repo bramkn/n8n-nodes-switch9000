@@ -215,7 +215,6 @@ export class Switch9000 implements INodeType {
 								type: 'number',
 								typeOptions: {
 									minValue: 0,
-									maxValue: 3,
 								},
 								default: 0,
 								description: 'The index of output to which to send data to if rule matches',
@@ -298,7 +297,6 @@ export class Switch9000 implements INodeType {
 								type: 'number',
 								typeOptions: {
 									minValue: 0,
-									maxValue: 3,
 								},
 								default: 0,
 								description: 'The index of output to which to send data to if rule matches',
@@ -398,7 +396,6 @@ export class Switch9000 implements INodeType {
 								type: 'number',
 								typeOptions: {
 									minValue: 0,
-									maxValue: 3,
 								},
 								default: 0,
 								description: 'The index of output to which to send data to if rule matches',
@@ -532,7 +529,6 @@ export class Switch9000 implements INodeType {
 								type: 'number',
 								typeOptions: {
 									minValue: 0,
-									maxValue: 3,
 								},
 								default: 0,
 								description: 'The index of output to which to send data to if rule matches',
@@ -546,7 +542,7 @@ export class Switch9000 implements INodeType {
 			{
 				displayName: 'Fallback Output',
 				name: 'fallbackOutput',
-				type: 'options',
+				type: 'number',
 				displayOptions: {
 					show: {
 						mode: ['rules'],
@@ -555,30 +551,7 @@ export class Switch9000 implements INodeType {
 						],
 					},
 				},
-				// eslint-disable-next-line n8n-nodes-base/node-param-options-type-unsorted-items
-				options: [
-					{
-						name: 'None',
-						value: -1,
-					},
-					{
-						name: '0',
-						value: 0,
-					},
-					{
-						name: '1',
-						value: 1,
-					},
-					{
-						name: '2',
-						value: 2,
-					},
-					{
-						name: '3',
-						value: 3,
-					},
-				],
-				default: -1,
+				default: 0,
 				description: 'The output to which to route all items which do not match any of the rules',
 			},
 		],
