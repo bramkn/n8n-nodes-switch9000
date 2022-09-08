@@ -13,7 +13,7 @@ export class Switch9000 implements INodeType {
 	description: INodeTypeDescription = {
 		displayName: 'Switch 9000',
 		name: 'switch9000',
-		subtitle: '={{$parameter["nodeMode"] + ": " + $parameter["routeIndex"]}}',
+		subtitle: '={{$parameter["nodeMode"] + ": " + $parameter["routeIndex"] ?? ""}}',
 		group: ['transform'],
 		version: 1,
 		icon: 'file:s9000.svg',
