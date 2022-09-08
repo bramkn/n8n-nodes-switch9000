@@ -18,9 +18,13 @@ The code from the switch node was borrowed in the development of this node. So p
 
 ## Usage
 
-When placing the node, you need to choose the mode of it. You can choose between Reciever and Sender.
+When placing the node, you need to choose the mode of it. You can choose between Receiver and Sender.
 
 ![Mode](https://github.com/bramkn/n8n-nodes-switch9000/blob/master/images/mode.png)
+
+This will determine of this node will send or receive data.
+When selecting sender, it will act the same as a normal switch node.
+* [n8n switch node docs](https://docs.n8n.io/integrations/builtin/core-nodes/n8n-nodes-base.switch/)
 
 
 ## Resources
