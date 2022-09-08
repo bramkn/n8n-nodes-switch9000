@@ -32,7 +32,9 @@ When Receiver is chosen. You need to select the Index you want to receive on thi
 
 ![Receiver](https://github.com/bramkn/n8n-nodes-switch9000/blob/master/images/receiver.png)
 
+You can then add as many output as you want like in the image below.
 
+![Switch9000](https://github.com/bramkn/n8n-nodes-switch9000/blob/master/images/switch9000.png)
 
 ## Resources
 
