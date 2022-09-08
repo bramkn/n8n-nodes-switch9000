@@ -1,5 +1,6 @@
 import { IExecuteFunctions } from 'n8n-core';
 import {
+	IDataObject,
 	INodeExecutionData,
 	INodeParameters,
 	INodeType,
@@ -40,7 +41,7 @@ export class Switch9000 implements INodeType {
 			},
 			{
 				displayName: 'Route Index',
-				name: 'index',
+				name: 'routeIndex',
 				type: 'number',
 				default: 0,
 				displayOptions:{
@@ -588,7 +589,7 @@ export class Switch9000 implements INodeType {
 	// with whatever the user has entered.
 	// You can make async calls and use `await`.
 	async execute(this: IExecuteFunctions): Promise<INodeExecutionData[][]> {
-		const returnData: INodeExecutionData[][] = [[], [], [], []];
+		const returnData: INodeExecutionData[] = [];
 
 		const items = this.getInputData();
 
@@ -682,78 +683,92 @@ export class Switch9000 implements INodeType {
 		};
 
 		const checkIndexRange = (index: number) => {
-			if (index < 0 || index >= returnData.length) {
+			if (index < 0) {
 				throw new NodeOperationError(
 					this.getNode(),
-					`The ouput ${index} is not allowed. It has to be between 0 and ${returnData.length - 1}!`,
+					`The ouput ${index} is not allowed. It has to be between 0 and over 9000!`,
 				);
 			}
 		};
+		const nodeMode = this.getNodeParameter('nodeMode', 0) as string;
+		if(nodeMode==="sender"){
+			// Itterate over all items to check to which output they should be routed to
+			itemLoop: for (let itemIndex = 0; itemIndex < items.length; itemIndex++) {
+				try {
+					item = items[itemIndex];
+					mode = this.getNodeParameter('mode', itemIndex) as string;
 
-		// Itterate over all items to check to which output they should be routed to
-		itemLoop: for (let itemIndex = 0; itemIndex < items.length; itemIndex++) {
-			try {
-				item = items[itemIndex];
-				mode = this.getNodeParameter('mode', itemIndex) as string;
+					if (mode === 'expression') {
+						// One expression decides how to route item
 
-				if (mode === 'expression') {
-					// One expression decides how to route item
-
-					outputIndex = this.getNodeParameter('output', itemIndex) as number;
-					checkIndexRange(outputIndex);
-
-					returnData[outputIndex].push(item);
-				} else if (mode === 'rules') {
-					// Rules decide how to route item
-
-					const dataType = this.getNodeParameter('dataType', 0) as string;
-
-					value1 = this.getNodeParameter('value1', itemIndex) as NodeParameterValue;
-					if (dataType === 'dateTime') {
-						value1 = convertDateTime(value1);
-					}
-
-					for (ruleData of this.getNodeParameter(
-						'rules.rules',
-						itemIndex,
-						[],
-					) as INodeParameters[]) {
-						// Check if the values passes
-
-						value2 = ruleData.value2 as NodeParameterValue;
-						if (dataType === 'dateTime') {
-							value2 = convertDateTime(value2);
-						}
-
-						compareOperationResult = compareOperationFunctions[ruleData.operation as string](
-							value1,
-							value2,
-						);
-
-						if (compareOperationResult === true) {
-							// If rule matches add it to the correct output and continue with next item
-							checkIndexRange(ruleData.output as number);
-							returnData[ruleData.output as number].push(item);
-							continue itemLoop;
-						}
-					}
-
-					// Check if a fallback output got defined and route accordingly
-					outputIndex = this.getNodeParameter('fallbackOutput', itemIndex) as number;
-					if (outputIndex !== -1) {
+						outputIndex = this.getNodeParameter('output', itemIndex) as number;
 						checkIndexRange(outputIndex);
-						returnData[outputIndex].push(item);
-					}
-				}
-			} catch (error) {
-				if (this.continueOnFail()) {
-					returnData[0].push({ json: { error: error.message } });
-					continue;
-				}
-				throw error;
-			}
-		}
+						item.json = {
+							route:outputIndex,
+							data:item.json
+						};
 
-		return returnData;
+						returnData.push(item);
+					} else if (mode === 'rules') {
+						// Rules decide how to route item
+
+						const dataType = this.getNodeParameter('dataType', 0) as string;
+
+						value1 = this.getNodeParameter('value1', itemIndex) as NodeParameterValue;
+						if (dataType === 'dateTime') {
+							value1 = convertDateTime(value1);
+						}
+
+						for (ruleData of this.getNodeParameter(
+							'rules.rules',
+							itemIndex,
+							[],
+						) as INodeParameters[]) {
+							// Check if the values passes
+
+							value2 = ruleData.value2 as NodeParameterValue;
+							if (dataType === 'dateTime') {
+								value2 = convertDateTime(value2);
+							}
+
+							compareOperationResult = compareOperationFunctions[ruleData.operation as string](
+								value1,
+								value2,
+							);
+
+							if (compareOperationResult === true) {
+								// If rule matches add it to the correct output and continue with next item
+								checkIndexRange(ruleData.output as number);
+								returnData.push(item);
+								continue itemLoop;
+							}
+						}
+
+						// Check if a fallback output got defined and route accordingly
+						outputIndex = this.getNodeParameter('fallbackOutput', itemIndex) as number;
+						if (outputIndex !== -1) {
+							checkIndexRange(outputIndex);
+							returnData.push(item);
+						}
+					}
+				} catch (error) {
+					if (this.continueOnFail()) {
+						returnData.push({ json: { error: error.message } });
+						continue;
+					}
+					throw error;
+				}
+			}
+		};
+		if(nodeMode === "receiver"){
+			const routeIndex = this.getNodeParameter('routeIndex', 0) as number;
+			const data:INodeExecutionData[] = items.filter(x => x.json.route === routeIndex).map(function(item) {
+				return {binary:item.binary,json:item.data} as INodeExecutionData;
+			});
+			returnData.push.apply(returnData,data);
+
+		}
+		return this.prepareOutputData(returnData);
+		//return returnData;
 	}
 }
