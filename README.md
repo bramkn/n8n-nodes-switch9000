@@ -4,6 +4,8 @@ This is an n8n community node. It lets you create a switch with an infinite numb
 For as long as you n8n instance allows it of course. 
 It is unsure how n8n would perform with a node that has over 9000 outputs.
 
+If you have any questions or remarks please contact me @ bram@knitco.nl
+
 
 [n8n](https://n8n.io/) is a [fair-code licensed](https://docs.n8n.io/reference/license/) workflow automation platform.
 
@@ -26,7 +28,7 @@ This will determine of this node will send or receive data.
 When selecting sender, it will give you the same options and act the same as a normal switch node.
 * [n8n switch node docs](https://docs.n8n.io/integrations/builtin/core-nodes/n8n-nodes-base.switch/)
 
-When Receiver is choosen. You need to select the Index you want to receive on this part of the workflow. It will then filter the data and continue with the data from the Index choosen.
+When Receiver is chosen. You need to select the Index you want to receive on this part of the workflow. It will then filter the data and continue with the data from the Index choosen.
 
 ![Receiver](https://github.com/bramkn/n8n-nodes-switch9000/blob/master/images/receiver.png)
 
