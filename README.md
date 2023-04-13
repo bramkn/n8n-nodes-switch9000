@@ -4,10 +4,26 @@ This is an n8n community node. It lets you create a switch with an infinite numb
 For as long as you n8n instance allows it of course. 
 It is unsure how n8n would perform with a node that has over 9000 outputs.
 
-If you have any questions or remarks please contact me @ bram@knitco.nl
-
-
 [n8n](https://n8n.io/) is a [fair-code licensed](https://docs.n8n.io/reference/license/) workflow automation platform.
+
+## Developer
+
+Hi, 
+
+My name is Bram and I am the developer of this node.
+I am an independant consultant and expert partner of n8n.
+My nodes are free to use for everyone, but please consider [donating](https://donate.stripe.com/3cs5oe7xM6L77Yc5ko) when you use my nodes.
+This helps me to build and maintain nodes for everyone to use.
+
+If you are looking for some outside help with n8n, I can of course also offer my services.
+* Node Development
+* Workflow Development
+* Mentoring
+* Support
+
+Please contact me @ bram@knitco.nl if you want to make use of my services.
+
+For questions or issues with nodes, please open an issue on Github.
 
 ## Installation
 
